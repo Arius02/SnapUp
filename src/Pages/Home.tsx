@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
 import Slider from "../Components/Slider"
 import Products from "../Components/Products"
-import ProductByCategory from "../Components/ProductByCategory"
+import {  useSelector } from 'react-redux'
+import {  RootState } from "../Store/Store"
+
 const Home = () => {
+  const state = useSelector((state: RootState) => state.products)
   return (
     <div className="container mx-auto px-10">
-      <Slider/>
-      <div className="mt-10">
+      {/* <Slider/> */}
+      { <> <div className="mt-10">
         <Products title="SEE OUR PRODUCTS" arg="products" />
         </div>
       <div className="mt-10">
@@ -26,7 +29,7 @@ const Home = () => {
         </div>
       <div className="mt-10">
         <Products arg="products" title='LAPTOPS' filter="laptops" />        
-        </div>
+        </div></>}
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import ProductType from "../utils/ProductType"
 
 export const getProducts = createAsyncThunk("product/getProduuct", async (arg:string, thunkAPI)=>{
 try{
@@ -17,7 +16,7 @@ interface productType {
 }
 const initialState = {
   products: [],
-  loading: false,
+  loading: true,
 } as productType
 const ProductReducer = createSlice({
   name:"product",
@@ -26,8 +25,6 @@ const ProductReducer = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state, action) => {
       state.loading = true
-      // console.log(action)
-
     })
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false
@@ -35,8 +32,6 @@ const ProductReducer = createSlice({
     })
     builder.addCase(getProducts.rejected, (state, action) => {
       state.loading= false
-      console.log(action.error , "act")
-
     })
   },
 })
