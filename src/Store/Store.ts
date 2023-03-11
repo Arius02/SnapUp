@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import SidebarSlice from "./SidebarSlice"
+import ProductReducer from "./ProductSlice"
 export const store = configureStore({
   reducer:{
-    // sidebar: SidebarSlice
+    products:ProductReducer
   }
 })
 export type RootState = ReturnType<typeof store.getState>

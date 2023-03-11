@@ -72,8 +72,8 @@ const Navbar = ({ open, setOpen }: propsType) => {
           </h5>
         </div>
       </div>
-      <div className="px-5 py-3 grid grid-cols-12 relative">
-        <div className="md:col-span-3 col-span-10 flex items-center text-white ">
+      <div className="px-5 py-3 gap-x-2 grid grid-cols-12 relative">
+        <div className="md:col-span-3 col-span-9 flex items-center text-white ">
           <GiHamburgerMenu className="text-2xl lg:mr-4 mr-1 cursor-pointer" onClick={()=>handleOpen()}/>
           <FaShoppingBag className="text-2xl mr-1" />
           <Link to="/">
@@ -82,13 +82,13 @@ const Navbar = ({ open, setOpen }: propsType) => {
             </h1>
           </Link>
         </div>
-        <div className="md:col-span-8 col-sapn-2 p-1 flex md:bg-white bg-transparent" >
+        <div className="md:col-span-8 col-sapn-1 p-1 flex md:bg-white bg-transparent" >
           <input className={`md:block hidden focus-visible:outline-0 caret-primary w-[96%]`} type="text" placeholder="Search your preferred items here" />
-          <div className="md:bg-secondary flex items-center justify-center p-2">
-            {!showDown && <BsSearch onClick={() => handleSearchClick()} className=" cursor-pointer text-xl  text-white" />}
+          <div className="md:bg-secondary flex items-center justify-center p-2 ">
+            {!showDown && <BsSearch onClick={() => handleSearchClick()} className=" cursor-pointer  text-xl  text-white" />}
           </div>
         </div>
-        <div className="col-span-1 flex justify-center items-center ">
+        <div className="md:col-span-1 col-span-2 flex justify-center items-center ">
           <Link to="/shopping-cart">
             <RiShoppingCart2Fill className="text-white text-3xl" />
           </Link>
@@ -102,7 +102,7 @@ const Navbar = ({ open, setOpen }: propsType) => {
         <div className={`${showDown ? "flex " : "hidden "} col-span-12 mt-4 bg-white p-1`} >
           <input className='focus-visible:outline-0 caret-primary w-[97%]' type="text" placeholder="Search your preferred items here" />
           <div className="bg-secondary flex items-center justify-center p-2">
-            <BsSearch onClick={() => handleSearchClick()} className="cursor-pointer text-xl text-white" />
+            <BsSearch onClick={() => handleSearchClick()} className="cursor-pointer  text-xl text-white" />
           </div>
         </div>
       </div>

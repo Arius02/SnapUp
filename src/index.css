@@ -10,3 +10,16 @@
 .link{
  @apply text-center duration-100 ease-in hover:opacity-75
 }
+.categories::-webkit-scrollbar {
+  width: 8px;
+  background-color: white;
+}
+
+.categories::-webkit-scrollbar-thumb {
+  border-radius:3px;
+  background-color:#F94E30;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  -ms-border-radius:3px;
+  -o-border-radius:3px;
+}
