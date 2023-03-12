@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import ProductType from "../utils/ProductType";
 
 export const getProducts = createAsyncThunk("product/getProduuct", async (arg:string, thunkAPI)=>{
 try{
@@ -11,11 +12,22 @@ try{
 }
 })
 interface productType {
-  products: []
+  products: ProductType[]
   loading: boolean
 }
 const initialState = {
-  products: [],
+  products: [{id: 0,
+  title: "",
+  description: "",
+  price: 0,
+  discountPercentage: 0,
+  rating: 0,
+  stock: 0,
+  brand: "",
+  category: "",
+  thumbnail:"",
+  images: [""]}
+  ],
   loading: true,
 } as productType
 const ProductReducer = createSlice({
@@ -36,5 +48,4 @@ const ProductReducer = createSlice({
   },
 })
 
-// export ProductReducer.actions
 export default ProductReducer.reducer

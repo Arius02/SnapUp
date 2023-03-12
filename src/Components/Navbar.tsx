@@ -72,8 +72,8 @@ const Navbar = ({ open, setOpen }: propsType) => {
           </h5>
         </div>
       </div>
-      <div className="px-5 py-3 gap-x-2 grid grid-cols-12 relative">
-        <div className="md:col-span-3 col-span-9 flex items-center text-white ">
+      <div className="md:px-5 px-0 py-3 gap-x-2 grid grid-cols-12 relative">
+        <div className="md:col-span-3 col-span-9 pl-5 flex items-center text-white ">
           <GiHamburgerMenu className="text-2xl lg:mr-4 mr-1 cursor-pointer" onClick={()=>handleOpen()}/>
           <FaShoppingBag className="text-2xl mr-1" />
           <Link to="/">
@@ -88,13 +88,13 @@ const Navbar = ({ open, setOpen }: propsType) => {
             {!showDown && <BsSearch onClick={() => handleSearchClick()} className=" cursor-pointer  text-xl  text-white" />}
           </div>
         </div>
-        <div className="md:col-span-1 col-span-2 flex justify-center items-center ">
+        <div className="md:col-span-1 col-span-2 pr-5 flex justify-center items-center ">
           <Link to="/shopping-cart">
             <RiShoppingCart2Fill className="text-white text-3xl" />
           </Link>
         </div>
         <div className=" md:col-span-3"></div>
-        <div className="md:col-span-9 col-span-12 md:mx-0 mx-auto flex space-x-2 text-white lg:text-sm md:text-[16px] text-[10px] font-light">
+        <div className="md:col-span-9 md:px-0 px-2 col-span-12 md:mx-0 mx-auto flex space-x-2 text-white lg:text-sm md:text-[16px] text-[10px] font-light">
           {CategoryLinks.map((link) => <Link key={link.id} to={`/product-category${link.path}`} className="link">
             {link.name}
           </Link>)}

@@ -3,7 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body {
+ background-color:  #F5F5F5;
+}
 .after {
   @apply relative after:absolute after:h-full after:w-[1px] after:top-0 after:-right-[10px] after:bg-white after:opacity-50
 }

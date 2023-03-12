@@ -1,34 +1,30 @@
-import React, { useEffect } from 'react'
 import Slider from "../Components/Slider"
-import Products from "../Components/Products"
-import {  useSelector } from 'react-redux'
-import {  RootState } from "../Store/Store"
+import ProductsList from "../Components/ProductsList"
 
 const Home = () => {
-  const state = useSelector((state: RootState) => state.products)
   return (
     <div className="container mx-auto px-10">
-      {/* <Slider/> */}
+      <Slider/>
       { <> <div className="mt-10">
-        <Products title="SEE OUR PRODUCTS" arg="products" />
+        <ProductsList title="SEE OUR PRODUCTS" arg="products" />
         </div>
       <div className="mt-10">
-        <Products  arg="products" title='SMARTPHONES' filter="smartphones" />
+        <ProductsList  arg="products" title='SMARTPHONES' filter="smartphones" />
         </div>
       <div className="mt-10">
-          <Products arg="products" title='SKIN CARE' filter="skincare" />        
+          <ProductsList arg="products" title='SKIN CARE' filter="skincare" />        
         </div>
       <div className="mt-10">
-        <Products arg="products" title='HOME DECORATION' filter="home-decoration" />        
+        <ProductsList arg="products" title='HOME DECORATION' filter="home-decoration" />        
         </div>
       <div className="mt-10">
-        <Products arg="products" title='GROCERIES' filter="groceries" />        
+        <ProductsList arg="products" title='GROCERIES' filter="groceries" />        
         </div>
       <div className="mt-10">
-        <Products arg="products" title='FRAGRANCES' filter="fragrances" />        
+        <ProductsList arg="products" title='FRAGRANCES' filter="fragrances" />        
         </div>
       <div className="mt-10">
-        <Products arg="products" title='LAPTOPS' filter="laptops" />        
+        <ProductsList arg="products" title='LAPTOPS' filter="laptops" />        
         </div></>}
     </div>
   )

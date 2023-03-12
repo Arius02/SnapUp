@@ -21,10 +21,10 @@ const App = () => {
         <Sidebar setOpen={setOpen} open={open} />
    <Routes>
     <Route path="/" element={<Home/>}/>
-    <Route path="/product-details" element={<ProductDetails/>}/>
+    <Route path="/product-details/:id" element={<ProductDetails/>}/>
     <Route path="/product-category/:id" element={<ProductCategory />}/>
-    <Route path="/shopping-cart" element={<ShoppingCart/>}/>
-    <Route path="/search" element={<Search/>}/>
+    <Route path="/shopping-cart/:id" element={<ShoppingCart/>}/>
+    <Route path="/search/:id" element={<Search/>}/>
    </Routes>
    </BrowserRouter>
   </Provider>

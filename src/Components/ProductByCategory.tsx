@@ -5,7 +5,7 @@ import { getProducts } from '../Store/ProductSlice'
 import { useEffect } from 'react'
 import ProductType from "../utils/ProductType"
 import Product from "./Product"
-import loaderSVG from "../assets/images/loader.svg"
+import Loader from "./Loader"
 
 interface propsType {
   arg: string
@@ -18,10 +18,7 @@ const ProductByCategory = ({ arg, title }: propsType)=>{
     Dispatch(getProducts(arg))
     
   }, [title])
-
-  return state.loading ? <div className="h-screen flex justify-center">
-    <img src={loaderSVG} className="w-64" alt="loader" />
-  </div> : <>
+  return state.loading ? <Loader/> : <>
       <Title title={title} />
       <div className="grid gap-5 mt-10 grid-cols-12">
         {state.products.map((product: ProductType) => (

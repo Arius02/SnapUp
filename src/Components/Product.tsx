@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import ProductType from "../utils/ProductType"
+import { formatPrice, getOldPrice } from '../utils/helprs'
 // import { MdAddShoppingCart } from "react-icons/md"
 // import { AiOutlineHeart } from "react-icons/ai"
 interface propsType {
@@ -26,7 +27,7 @@ const Product = ({ product }: propsType) => {
         <div className="relative w-fit mx-auto">
           <h5 className="absolute top-0 right-full font-light text-gray-400">
             <del>
-              $60
+              {formatPrice(getOldPrice(product.price, product.discountPercentage))}
             </del>
           </h5>
           <h4 className="font-bold   px-2 pb-2 text-center border-b-secondary border-b-2">
