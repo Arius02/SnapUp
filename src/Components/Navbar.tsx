@@ -1,5 +1,5 @@
-import { useState, useEffect, SetStateAction, Dispatch } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect, SetStateAction, Dispatch,FormEvent } from "react"
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { AiFillInstagram } from "react-icons/ai"
 import { BsFacebook, BsSearch } from "react-icons/bs"
 import { MdOutlineContactSupport } from "react-icons/md"
@@ -13,17 +13,19 @@ interface propsType{
   open : boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
-const Navbar = ({ open, setOpen }: propsType) => {
+const Navbar = ({ setOpen }: propsType) => {
+  const {id} = useParams()
   const [screenSize, setScreenSize] = useState<number>(window.innerWidth)
   const [showDown, setShowDown] = useState<boolean | null>(null)
-  const handleOpen= ()=>{
-    setTimeout(() => {
-      setOpen(true)
-    }, 10)
-  }
-  const handleSearchClick = (): void => {
-    if (screenSize <= 768) {
+  const Navigate = useNavigate()
+  const handleSearchClick = (e: FormEvent<HTMLFormElement> ): void => {
+    e.preventDefault()
+    const searchTerm = document.getElementById("search-term") as HTMLInputElement
+    if (screenSize <= 768 ) {
       setShowDown(true)
+    }
+    if (searchTerm.value != "") {
+      Navigate(`/search/${searchTerm.value}`)
     }
   }
   const handleInputDisplay = (): void => {
@@ -31,6 +33,7 @@ const Navbar = ({ open, setOpen }: propsType) => {
     if (screenSize > 768) {
       setShowDown(false)
     }
+ 
   }
   useEffect(() => {
     window.addEventListener("resize", handleInputDisplay)
@@ -41,7 +44,8 @@ const Navbar = ({ open, setOpen }: propsType) => {
   return <div className="bg-primary">
 
     <nav className=" mx-auto ">
-      <div className="px-5 md:text-md text-sm text-white md:flex block justify-between py-1 text-center border-b border-[rgba(255,255,255,.3)]">
+      <div className="px-5 md:text-md text-sm text-white md:flex block justify-between py-1 text-center border-b
+       border-[rgba(255,255,255,.3)]">
         <div className="space-x-5 flex md:mb-0 mb-2 md:justify-start justify-center  items-center ">
           <h5 className=" cursor-pointer link after ">
             Seller Center
@@ -74,7 +78,7 @@ const Navbar = ({ open, setOpen }: propsType) => {
       </div>
       <div className="md:px-5 px-0 py-3 gap-x-2 grid grid-cols-12 relative">
         <div className="md:col-span-3 col-span-9 pl-5 flex items-center text-white ">
-          <GiHamburgerMenu className="text-2xl lg:mr-4 mr-1 cursor-pointer" onClick={()=>handleOpen()}/>
+          <GiHamburgerMenu className="text-2xl lg:mr-4 mr-1 cursor-pointer" onClick={()=> setOpen(true)}/>
           <FaShoppingBag className="text-2xl mr-1" />
           <Link to="/">
             <h1 className="text-2xl">
@@ -82,12 +86,12 @@ const Navbar = ({ open, setOpen }: propsType) => {
             </h1>
           </Link>
         </div>
-        <div className="md:col-span-8 col-sapn-1 p-1 flex md:bg-white bg-transparent" >
-          <input className={`md:block hidden focus-visible:outline-0 caret-primary w-[96%]`} type="text" placeholder="Search your preferred items here" />
+        <form onSubmit={(e)=> handleSearchClick(e)} className="md:col-span-8 col-sapn-1 p-1 flex md:bg-white bg-transparent" >
+          <input id="search-term" className={`md:block hidden focus-visible:outline-0 caret-primary w-[96%]`} type="text" placeholder="Search your preferred items here" />
           <div className="md:bg-secondary flex items-center justify-center p-2 ">
-            {!showDown && <BsSearch onClick={() => handleSearchClick()} className=" cursor-pointer  text-xl  text-white" />}
+            {!showDown && <button type="submit"><BsSearch className=" cursor-pointer  text-xl  text-white" /></button>}
           </div>
-        </div>
+        </form>
         <div className="md:col-span-1 col-span-2 pr-5 flex justify-center items-center ">
           <Link to="/shopping-cart">
             <RiShoppingCart2Fill className="text-white text-3xl" />
@@ -99,12 +103,12 @@ const Navbar = ({ open, setOpen }: propsType) => {
             {link.name}
           </Link>)}
         </div>
-        <div className={`${showDown ? "flex " : "hidden "} col-span-12 mt-4 bg-white p-1`} >
-          <input className='focus-visible:outline-0 caret-primary w-[97%]' type="text" placeholder="Search your preferred items here" />
+        <form onSubmit={(e) => handleSearchClick(e)} className={`${showDown ? "flex " : "hidden "} col-span-12 mt-4 bg-white p-1`} >
+          <input  id="search-term" className='focus-visible:outline-0 caret-primary w-[97%]' type="text" placeholder="Search your preferred items here" />
           <div className="bg-secondary flex items-center justify-center p-2">
-            <BsSearch onClick={() => handleSearchClick()} className="cursor-pointer  text-xl text-white" />
+            <button type="submit"><BsSearch className="cursor-pointer  text-xl text-white" /></button>
           </div>
-        </div>
+        </form>
       </div>
     </nav>
   </div>

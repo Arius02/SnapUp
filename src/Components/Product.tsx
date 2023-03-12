@@ -9,7 +9,7 @@ interface propsType {
 }
 const Product = ({ product }: propsType) => {
   return <div className="lg:col-span-3 relative shadow 
-  sm:col-span-6 col-span-12 h-[400px]">
+  sm:col-span-6 col-span-12 h-[400px] bg-white">
     <Link to={`/product-details/${product.id}`}>
       <div className="">
         <figure className="relative">
@@ -27,11 +27,11 @@ const Product = ({ product }: propsType) => {
         <div className="relative w-fit mx-auto">
           <h5 className="absolute top-0 right-full font-light text-gray-400">
             <del>
-              {formatPrice(getOldPrice(product.price, product.discountPercentage))}
+              ${product.price}
             </del>
           </h5>
           <h4 className="font-bold   px-2 pb-2 text-center border-b-secondary border-b-2">
-            ${product.price}
+            {formatPrice(getOldPrice(product.price,product.discountPercentage))}
           </h4>
         </div>
         <div className="bg-primary absolute top-5 -left-2 p-1 text-white font-semibold">

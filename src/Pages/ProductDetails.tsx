@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductType from '../utils/ProductType';
 import { getProduct } from '../Store/SingleProductSlice';
 import Loader from '../Components/Loader';
+import Product from '../Components/Product';
 const ProductDetails = () => {
 const {id} = useParams()
   const Dispatch: AppDispatch = useDispatch()
@@ -15,9 +16,9 @@ const {id} = useParams()
   useEffect(() => {
       Dispatch(getProduct(id? id :""))
   }, [])
-  useEffect(() => {
-
-  }, [state])
+  const addToCartHandler = ()=>{
+   
+  }
   const showInMain = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const img = document.getElementById("main-img") as HTMLImageElement
     if (img) {
@@ -73,13 +74,13 @@ const {id} = useParams()
             </div>
             <div className='bg-[#F5F5F5] mt-5 px-2 py-3 '>
               <div className='flex '>
-                <del className=' text-gray-500  text-lg'>{formatPrice(getOldPrice(state.product.price, state.product.discountPercentage))}</del>
+                <del className=' text-gray-500  text-lg'>${state.product.price}</del>
                 <h5 className=' ml-3 text-black'>
                   Inclusive of all taxes
                 </h5>
               </div>
               <div className='flex items-center space-x-3'>
-                <h2 className='text-primary text-4xl font-semibold'>${state.product.price}</h2>
+                <h2 className='text-primary text-4xl font-semibold'>{formatPrice(getOldPrice(state.product.price, state.product.discountPercentage))}</h2>
                 <h2 className='bg-primary text-sm  rounded-sm px-2 font-semibold text-white'> {state.product.discountPercentage} OFF</h2>
               </div>
             </div>
@@ -92,7 +93,7 @@ const {id} = useParams()
               </div>
             </div>
             <div className='flex space-x-3 mt-5'>
-              <button type='button' className='bg-primary bg-opacity-5 flex items-center py-2
+              <button type='button' onClick={addToCartHandler} className='bg-primary bg-opacity-5 flex items-center py-2
                 px-5  border-[1px] border-primary text-primary hover:bg-opacity-25 duration-200'>
                 <BsCartPlusFill className='mr-2' />
                 Add To Cart
