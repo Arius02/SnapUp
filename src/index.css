@@ -12,11 +12,15 @@ body {
 .link{
  @apply text-center duration-100 ease-in hover:opacity-75
 }
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #F94E30;
+}
 .categories::-webkit-scrollbar {
   width: 8px;
-  background-color: white;
 }
-
 .categories::-webkit-scrollbar-thumb {
   border-radius:3px;
   background-color:#F94E30;

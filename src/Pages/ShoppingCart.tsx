@@ -6,6 +6,8 @@ import { CartQty, deleteFromCart, getTotal, clearCart } from '../Store/CartSlice
 import { formatPrice } from '../utils/helprs'
 import { ImBin } from 'react-icons/im'
 import EmptyCart from '../Components/EmptyCart'
+import { Helmet } from "react-helmet";
+
 
 const ShoppingCart = () => {
   const { carts, itemsCount, totalAmount } = useSelector((state: RootState) => state.cart)
@@ -13,8 +15,13 @@ const ShoppingCart = () => {
   useEffect(() => {
     Dispatch(getTotal())
   })
-  return (
-    <div className='container mx-auto '>
+  return <>
+    <Helmet>
+      <title>
+        Shopping Cart
+      </title>
+    </Helmet>
+    <div className='container min-h-screen mx-auto '>
       {carts.length === 0 ? <EmptyCart /> : <>
         <div className=' md:grid grid-cols-12 hidden text-gray-500  bg-white my-5 px-5 py-2'>
           <h2 className='col-span-1'>S.N.</h2>
@@ -62,9 +69,10 @@ const ShoppingCart = () => {
             </button>
           </div>
         </div></>}
-        
+
     </div>
-  )
+  </>
+
 }
 
 export default ShoppingCart

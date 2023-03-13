@@ -1,11 +1,14 @@
-import Slider from "../Components/Slider"
 import ProductsList from "../Components/ProductsList"
-
+import {Helmet} from "react-helmet"
 const Home = () => {
-  return (
-    <div className="container mx-auto px-10">
-      <Slider/>
-      { <> <div className="mt-10">
+  return <>
+  <Helmet>
+    <title>
+      Home
+    </title>
+  </Helmet>
+    <div className="container min-h-screen mx-auto px-10">
+       <div className="mt-10">
         <ProductsList title="SEE OUR PRODUCTS" arg="products" />
         </div>
       <div className="mt-10">
@@ -25,9 +28,10 @@ const Home = () => {
         </div>
       <div className="mt-10">
         <ProductsList arg="products" title='LAPTOPS' filter="laptops" />        
-        </div></>}
+        </div>
     </div>
-  )
+  </>
+  
 }
 
 export default Home
