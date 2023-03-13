@@ -18,11 +18,11 @@ const App = () => {
     <Navbar setOpen={setOpen} open={open} />
     <Sidebar setOpen={setOpen} open={open} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product-details/:id" element={<ProductDetails />} />
-        <Route path="/product-category/:id" element={<ProductCategory />} />
-        <Route path="/shopping-cart" element={<ShoppingCart />} />
-        <Route path="/search/:id" element={<Search />} />
+        <Route path="/SnapUp/" element={<Home />} />
+        <Route path="/SnapUp/product-details/:id" element={<ProductDetails />} />
+        <Route path="/SnapUp/product-category/:id" element={<ProductCategory />} />
+        <Route path="/SnapUp/shopping-cart" element={<ShoppingCart />} />
+        <Route path="/SnapUp/search/:id" element={<Search />} />
       </Routes>
     <Foot/>
     </BrowserRouter>
