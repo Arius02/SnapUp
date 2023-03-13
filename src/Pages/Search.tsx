@@ -14,6 +14,7 @@ const Search = () => {
   const state = useSelector((state: RootState) => state.search)
   useEffect(() => {
     Dispatch(searchResult(id ? id : ""))
+      window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [id])
 
   return <>

@@ -21,6 +21,8 @@ const Navigate = useNavigate()
 
   useEffect(() => {
       Dispatch(getProduct(id? id :""))
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    
   }, [])
 
   const addToCartHandler = ()=>{

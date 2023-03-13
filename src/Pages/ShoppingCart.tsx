@@ -14,6 +14,7 @@ const ShoppingCart = () => {
   const Dispatch: AppDispatch = useDispatch()
   useEffect(() => {
     Dispatch(getTotal())
+      window.scrollTo({ top: 0, behavior: 'smooth' })
   })
   return <>
     <Helmet>

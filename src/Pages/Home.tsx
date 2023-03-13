@@ -1,6 +1,10 @@
 import ProductsList from "../Components/ProductsList"
 import {Helmet} from "react-helmet"
+import {useEffect} from "react"
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
   return <>
   <Helmet>
     <title>

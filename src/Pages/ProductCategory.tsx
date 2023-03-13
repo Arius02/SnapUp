@@ -1,7 +1,10 @@
 import { useParams, Params } from "react-router-dom"
 import ProductByCategory from "../Components/ProductByCategory"
-
+import {useEffect} from "react"
 const ProductCategory = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
   const { id }: Readonly<Params<string>> =useParams()
   return (
     <div className="container min-h-screen mx-auto px-10 mt-10"> 
