@@ -62,6 +62,7 @@ const ShoppingCart = () => {
             </button>
           </div>
         </div></>}
+        
     </div>
   )
 }

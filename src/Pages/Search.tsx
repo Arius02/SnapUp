@@ -16,7 +16,9 @@ const Search = () => {
   }, [id])
 
   return (<div className="container mx-auto px-10 mt-10">
-      {state.loading ? <Loader /> : state.products.length == 0 ? <p>p</p> : <><Title title={`Search Result for ${id}`} />
+      {state.loading ? <Loader /> : state.products.length == 0 ? <p className="font-bold text-xl text-red-900">
+      No Products Found.
+      </p> : <><Title title={`Search Result for ${id}`} />
         <div className="grid grid-cols-12 gap-5 mt-10 h-screen">
         {state.products.map((product, index) => <Product key={index} product={product} />)}
         </div>

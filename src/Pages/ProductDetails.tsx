@@ -1,28 +1,36 @@
 import { formatPrice, getDiscount } from '../utils/helprs';
 import { useEffect, useState } from 'react';
 import { BsCartPlusFill } from "react-icons/bs"
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState } from '../Store/Store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../Store/SingleProductSlice';
 import Loader from '../Components/Loader';
-import { addToCart } from '../Store/CartSlice';
+import CartMessage from '../Components/CartMessage';
+import { addToCart, CartMessageOn, CartMessageOff } from '../Store/CartSlice';
 
 const ProductDetails = () => {
 
 const {id} = useParams()
-
+const Navigate = useNavigate()
   const Dispatch: AppDispatch = useDispatch()
   const { product: { thumbnail, category, brand,rating, description, title, price, stock, images, discountPercentage }, loading } = useSelector((state: RootState) => state.singleProduct)
+  const { isCartMessageOn } = useSelector((state: RootState) => state.cart)
   const ID = useSelector((state: RootState) => state.singleProduct.product.id)
   useEffect(() => {
       Dispatch(getProduct(id? id :""))
   }, [])
 
   const addToCartHandler = ()=>{
+    Dispatch(CartMessageOn())
     const newPrice =getDiscount(price,discountPercentage )
     const totalPrice =(quantity*newPrice)
     Dispatch(addToCart({ title, ID, thumbnail,stock, newPrice,totalPrice, quantity }))
+  setTimeout(()=>{
+    Dispatch(CartMessageOff())
+    Navigate("/shopping-cart")
+  },700)
+  
   }
 
   const showInMain = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -59,7 +67,7 @@ const {id} = useParams()
           <div className='flex space-x-2 mt-3 '>
             {images.map((img:string, index:number) => <figure className='group border-2 w-1/5 border-transparent 
                hover:border-secondary hover:border-2 cursor-pointer'>
-              <img src={img} key={index} className='w-full group-hover:scale-[.9] duration-150' onClick={showInMain} alt="product image" />
+              <img src={img} key={index} className='w-full h-[100px] group-hover:scale-[.9] duration-150' onClick={showInMain} alt="product image" />
             </figure>)}
           </div>
         </div>
@@ -115,6 +123,7 @@ const {id} = useParams()
         </div>
       </div>
     </div>
+    {isCartMessageOn && <CartMessage/>}
   </div>
   )
 }
