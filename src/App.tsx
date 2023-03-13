@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./Components/Navbar"
 import Sidebar from "./Components/Sidebar"
 import Foot from "./Components/Foot"
@@ -14,18 +14,18 @@ import "./index.css"
 const App = () => {
   const [open, setOpen] = useState<boolean>(false)
   return <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
     <Navbar setOpen={setOpen} open={open} />
     <Sidebar setOpen={setOpen} open={open} />
       <Routes>
-        <Route path="/SnapUp/" element={<Home />} />
-        <Route path="/SnapUp/product-details/:id" element={<ProductDetails />} />
-        <Route path="/SnapUp/product-category/:id" element={<ProductCategory />} />
-        <Route path="/SnapUp/shopping-cart" element={<ShoppingCart />} />
-        <Route path="/SnapUp/search/:id" element={<Search />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product-details/:id" element={<ProductDetails />} />
+        <Route path="/product-category/:id" element={<ProductCategory />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
+        <Route path="/search/:id" element={<Search />} />
       </Routes>
     <Foot/>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 }
 
