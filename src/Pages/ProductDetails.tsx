@@ -1,38 +1,46 @@
-import OwlCarousel from 'react-owl-carousel';
-import { formatPrice, getOldPrice } from '../utils/helprs';
+import { formatPrice, getDiscount } from '../utils/helprs';
 import { useEffect, useState } from 'react';
 import { BsCartPlusFill } from "react-icons/bs"
 import { useParams } from 'react-router-dom';
 import { AppDispatch, RootState } from '../Store/Store';
 import { useDispatch, useSelector } from 'react-redux';
-import ProductType from '../utils/ProductType';
 import { getProduct } from '../Store/SingleProductSlice';
 import Loader from '../Components/Loader';
-import Product from '../Components/Product';
+import { addToCart } from '../Store/CartSlice';
+
 const ProductDetails = () => {
+
 const {id} = useParams()
+
   const Dispatch: AppDispatch = useDispatch()
-  const state = useSelector((state: RootState) => state.singleProduct)
+  const { product: { thumbnail, category, brand,rating, description, title, price, stock, images, discountPercentage }, loading } = useSelector((state: RootState) => state.singleProduct)
+  const ID = useSelector((state: RootState) => state.singleProduct.product.id)
   useEffect(() => {
       Dispatch(getProduct(id? id :""))
   }, [])
+
   const addToCartHandler = ()=>{
-   
+    const newPrice =getDiscount(price,discountPercentage )
+    const totalPrice =(quantity*newPrice)
+    Dispatch(addToCart({ title, ID, thumbnail,stock, newPrice,totalPrice, quantity }))
   }
+
   const showInMain = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const img = document.getElementById("main-img") as HTMLImageElement
     if (img) {
       img.src = e.currentTarget.src;
     }
+
   }
   const [quantity, setQuantity] = useState<number>(1)
   const increaseQty = () => {
     setQuantity((prevQty) => {
       let tempQty = prevQty + 1;
-      if (tempQty > state.product?.stock) tempQty = state.product?.stock;
+      if (tempQty > stock) tempQty = stock;
       return tempQty;
     })
   }
+
   const decreaseQty = () => {
     setQuantity((prevQty) => {
       let tempQty = prevQty - 1;
@@ -41,47 +49,47 @@ const {id} = useParams()
     })
   }
 
-  return (state.loading ?<Loader/>: <div className='container mx-auto'>
+  return (loading ?<Loader/>: <div className='container mx-auto'>
     <div className='bg-white p-5 m-10'>
       <div className='grid grid-cols-2'>
         <div className='md:col-span-1 col-span-2'>
           <figure className='duration-150'>
-            <img id='main-img' src={state.product.thumbnail} className='w-full ' alt={state.product.title} />
+            <img id='main-img' src={thumbnail} className='w-full ' alt={title} />
           </figure>
           <div className='flex space-x-2 mt-3 '>
-            {state.product.images.map((img, index) => <figure className='group border-2 w-1/5 border-transparent 
-               hover:border-secondary hover:border-2 '>
-              <img src={img} key={index} className='w-full group-hover:scale-[.9] duration-150' onClick={showInMain} alt="state.product image" />
+            {images.map((img:string, index:number) => <figure className='group border-2 w-1/5 border-transparent 
+               hover:border-secondary hover:border-2 cursor-pointer'>
+              <img src={img} key={index} className='w-full group-hover:scale-[.9] duration-150' onClick={showInMain} alt="product image" />
             </figure>)}
           </div>
         </div>
         <div className='md:col-span-1 col-span-2'>
           <div className='md:pr-0 md:pl-10 px-0 py-5'>
-            <h2 className='pb-2 border-b-[1px] font-semibold text-xl'>{state.product.title}</h2>
-            <p className='font-light text-md'>{state.product.description}</p>
+            <h2 className='pb-2 border-b-[1px] font-semibold text-xl'>{title}</h2>
+            <p className='font-light text-md'>{description}</p>
             <div className='flex space-x-4 mt-4'>
               <h3 className='text-primary py-0  pr-2 after:absolute 
                 relative after:left-full after:top-1 after:bottom-1 after:bg-primary after:w-[1px]'>
-                Rating: <span className='text-gray-700 text-[16px]  '>{state.product.rating}</span>
+                Rating: <span className='text-gray-700 text-[16px]'>{rating}</span>
               </h3>
               <h3 className='text-primary py-0  pr-2 after:absolute 
                 relative after:left-full after:top-1 after:bottom-1 after:bg-primary after:w-[1px]'>
-                Brand: <span className='text-gray-700 text-[16px]  '>{state.product.brand}</span>
+                Brand: <span className='text-gray-700 text-[16px]'>{brand}</span>
               </h3>
               <h3 className='text-primary py-0  '>
-                Category: <span className='text-gray-700 text-[16px]  '>{state.product.category}</span>
+                Category: <span className='text-gray-700 text-[16px]'>{category}</span>
               </h3>
             </div>
-            <div className='bg-[#F5F5F5] mt-5 px-2 py-3 '>
+            <div className='bg-[#F5F5F5] mt-5 px-2 py-3'>
               <div className='flex '>
-                <del className=' text-gray-500  text-lg'>${state.product.price}</del>
+                <del className=' text-gray-500  text-lg'>${price}</del>
                 <h5 className=' ml-3 text-black'>
                   Inclusive of all taxes
                 </h5>
               </div>
               <div className='flex items-center space-x-3'>
-                <h2 className='text-primary text-4xl font-semibold'>{formatPrice(getOldPrice(state.product.price, state.product.discountPercentage))}</h2>
-                <h2 className='bg-primary text-sm  rounded-sm px-2 font-semibold text-white'> {state.product.discountPercentage} OFF</h2>
+                <h2 className='text-primary text-4xl font-semibold'>{formatPrice(getDiscount(price, discountPercentage))}</h2>
+                <h2 className='bg-primary text-sm  rounded-sm px-2 font-semibold text-white'> {discountPercentage} OFF</h2>
               </div>
             </div>
             <div className='mt-5 flex space-x-2 items-center'>

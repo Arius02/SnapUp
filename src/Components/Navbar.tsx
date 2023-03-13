@@ -1,5 +1,5 @@
 import { useState, useEffect, SetStateAction, Dispatch,FormEvent } from "react"
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AiFillInstagram } from "react-icons/ai"
 import { BsFacebook, BsSearch } from "react-icons/bs"
 import { MdOutlineContactSupport } from "react-icons/md"
@@ -7,14 +7,20 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { FaShoppingBag } from "react-icons/fa"
 import { RiShoppingCart2Fill } from "react-icons/ri"
 import { CategoryLinks } from "../utils/constansts"
-
+import { useSelector, useDispatch } from "react-redux"
+import { RootState, AppDispatch } from "../Store/Store"
+import { getTotal } from "../Store/CartSlice"
 
 interface propsType{
   open : boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 const Navbar = ({ setOpen }: propsType) => {
-  const {id} = useParams()
+  const Dispatch: AppDispatch = useDispatch()
+  useEffect(() => {
+    Dispatch(getTotal())
+  })
+  const { itemsCount } = useSelector((state: RootState) => state.cart)
   const [screenSize, setScreenSize] = useState<number>(window.innerWidth)
   const [showDown, setShowDown] = useState<boolean | null>(null)
   const Navigate = useNavigate()
@@ -94,11 +100,15 @@ const Navbar = ({ setOpen }: propsType) => {
         </form>
         <div className="md:col-span-1 col-span-2 pr-5 flex justify-center items-center ">
           <Link to="/shopping-cart">
+            <div className="relative">
             <RiShoppingCart2Fill className="text-white text-3xl" />
+            <span className="absolute rounded-full h-5 w-5 top-[-5px]
+             right-[-5px] flex items-center justify-center bg-white text-primary">{itemsCount}</span>
+            </div>
           </Link>
         </div>
         <div className=" md:col-span-3"></div>
-        <div className="md:col-span-9 md:px-0 px-2 col-span-12 md:mx-0 mx-auto flex space-x-2 text-white lg:text-sm md:text-[16px] text-[10px] font-light">
+        <div className="md:col-span-9 md:px-0 px-2 col-span-12 md:mx-0 mx-auto flex flex-wrap space-x-2 text-white lg:text-sm md:text-[16px] text-[10px] font-light">
           {CategoryLinks.map((link) => <Link key={link.id} to={`/product-category${link.path}`} className="link">
             {link.name}
           </Link>)}

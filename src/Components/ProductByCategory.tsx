@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "../Store/Store"
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../Store/ProductSlice'
 import { useEffect } from 'react'
-import ProductType from "../utils/ProductType"
+import {ProductType} from "../utils/Interfaces"
 import Product from "./Product"
 import Loader from "./Loader"
 

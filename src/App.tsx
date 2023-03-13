@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Sidebar from "./Components/Sidebar"
 import Home from "./Pages/Home"
@@ -10,10 +10,7 @@ import { Provider } from "react-redux"
 import { store } from "./Store/Store"
 import "./index.css"
 import Navbar from "./Components/Navbar"
-
-
 const App = () => {
-
   const[open, setOpen] = useState<boolean>(false)
   return <Provider store={store}>
    <BrowserRouter>
@@ -23,7 +20,7 @@ const App = () => {
     <Route path="/" element={<Home/>}/>
     <Route path="/product-details/:id" element={<ProductDetails/>}/>
     <Route path="/product-category/:id" element={<ProductCategory />}/>
-    <Route path="/shopping-cart/:id" element={<ShoppingCart/>}/>
+    <Route path="/shopping-cart" element={<ShoppingCart/>}/>
     <Route path="/search/:id" element={<Search/>}/>
    </Routes>
    </BrowserRouter>

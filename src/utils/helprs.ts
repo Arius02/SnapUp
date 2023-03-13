@@ -4,6 +4,6 @@ export const formatPrice = (price: number) => {
         currency: "USD"
     }).format(price);
 }
-export const getOldPrice = (price: number, discountPercentage: number): number =>{
+export const getDiscount = (price: number, discountPercentage: number): number =>{
   return (price) - (price * (discountPercentage / 100))
 }
