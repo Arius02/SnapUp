@@ -7,7 +7,7 @@ const ProductCategory = () => {
   }, [])
   const { id }: Readonly<Params<string>> =useParams()
   return (
-    <div className="container min-h-screen mx-auto px-10 mt-10"> 
+    <div className="container min-h-screen mx-auto md:px-10 px-3 mt-10"> 
       <ProductByCategory arg={`products/category/${id}`} title={`${id && id.toUpperCase()}`}  />
 </div>
   )

@@ -27,11 +27,17 @@ const Navbar = ({ setOpen }: propsType) => {
   const handleSearchClick = (e: FormEvent<HTMLFormElement> ): void => {
     e.preventDefault()
     const searchTerm = document.getElementById("search-term") as HTMLInputElement
+    const searchTermSm = document.getElementById("search-term-sm") as HTMLInputElement
     if (screenSize <= 768 ) {
       setShowDown(true)
     }
-    if (searchTerm.value != "") {
+    if (searchTerm.value !== "") {
       Navigate(`/search/${searchTerm.value}`)
+      console.log("search")
+    }
+    if (searchTermSm.value !== "") {
+      Navigate(`/search/${searchTermSm.value}`)
+      console.log("search")
     }
   }
   const handleInputDisplay = (): void => {
@@ -95,7 +101,8 @@ const Navbar = ({ setOpen }: propsType) => {
         <form onSubmit={(e)=> handleSearchClick(e)} className="md:col-span-8 col-sapn-1 p-1 flex md:bg-white bg-transparent" >
           <input id="search-term" className={`md:block hidden focus-visible:outline-0 caret-primary w-[96%]`} type="text" placeholder="Search your preferred items here" />
           <div className="md:bg-secondary flex items-center justify-center p-2 ">
-            {!showDown && <button type="submit"><BsSearch className=" cursor-pointer  text-xl  text-white" /></button>}
+            {!showDown && <button type="submit">
+              <BsSearch className=" cursor-pointer  text-xl  text-white" /></button>}
           </div>
         </form>
         <div className="md:col-span-1 col-span-2 pr-5 flex justify-center items-center ">
@@ -113,10 +120,13 @@ const Navbar = ({ setOpen }: propsType) => {
             {link.name}
           </Link>)}
         </div>
-        <form onSubmit={(e) => handleSearchClick(e)} className={`${showDown ? "flex " : "hidden "} col-span-12 mt-4 bg-white p-1`} >
-          <input  id="search-term" className='focus-visible:outline-0 caret-primary w-[97%]' type="text" placeholder="Search your preferred items here" />
+        <form onSubmit={(e) => handleSearchClick(e)} 
+        className={`${showDown ? "flex " : "hidden "} col-span-12 mt-4 bg-white p-1`} >
+          <input  id="search-term-sm" className='focus-visible:outline-0 caret-primary w-[97%]'
+           type="text" placeholder="Search your preferred items here" />
           <div className="bg-secondary flex items-center justify-center p-2">
-            <button type="submit"><BsSearch className="cursor-pointer  text-xl text-white" /></button>
+            <button type="submit">
+              <BsSearch className="cursor-pointer  text-xl text-white" /></button>
           </div>
         </form>
       </div>

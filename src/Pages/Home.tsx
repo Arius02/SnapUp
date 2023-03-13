@@ -11,7 +11,7 @@ const Home = () => {
       Home
     </title>
   </Helmet>
-    <div className="container min-h-screen mx-auto px-10">
+    <div className="container min-h-screen mx-auto px-3 md:px-10">
        <div className="mt-10">
         <ProductsList title="SEE OUR PRODUCTS" arg="products" />
         </div>

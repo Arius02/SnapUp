@@ -40,10 +40,10 @@ const ShoppingCart = () => {
               <img src={cart.thumbnail} className="w-10 mr-1" alt="product picture" />
               <h2 >{cart.title}</h2>
             </Link>
-            <h2 className='md:col-span-2 col-span-6 mt-4'>
+            <h2 className='md:col-span-2 col-span-7 mt-4'>
               <span className="inline md:hidden">Price For Unit: </span>
               {formatPrice(cart.newPrice)}</h2>
-            <div className='flex md:col-span-2 col-span-6 justify-center mt-4'>
+            <div className='flex md:col-span-2 col-span-5 justify-center mt-4'>
               <button type='button' onClick={() => Dispatch(CartQty({ type: "DEC", ID: cart.ID }))} className='flex align-center justify-center px-1 border-[1px]'>-</button>
               <p className='flex align-center justify-center px-4 border-[1px]'>{cart.quantity}</p>
               <button type='button' onClick={() => Dispatch(CartQty({ type: "INC", ID: cart.ID }))} className='flex align-center justify-center px-1 border-[1px]'>+</button>

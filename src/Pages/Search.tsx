@@ -21,7 +21,7 @@ const Search = () => {
 <Helmet>
   <title>Search about:{id}</title>
 </Helmet>
-    <div className="container mx-auto px-10 mt-10">
+    <div className="container mx-auto md:px-10 px-3 mt-10">
       {state.loading ? <Loader /> : state.products.length == 0 ? <p className="min-h-screen font-bold text-xl text-red-900">
         No Products Found.
       </p> : <><Title title={`Search Result for ${id}`} />

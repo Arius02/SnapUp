@@ -22,7 +22,7 @@ const Navigate = useNavigate()
   useEffect(() => {
       Dispatch(getProduct(id? id :""))
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    
+
   }, [])
 
   const addToCartHandler = ()=>{
@@ -65,8 +65,8 @@ const Navigate = useNavigate()
     <Helmet>
       <title>{title}</title>
     </Helmet>
-    {loading ?<Loader />: <div className='container min-h-screen mx-auto'>
-      <div className='bg-white p-5 m-10'>
+    {loading ?<Loader />: <div className='container min-h-screen mx-auto relative'>
+      <div className='bg-white p-5 my-10 w-full'>
         <div className='grid grid-cols-2'>
           <div className='md:col-span-1 col-span-2'>
             <figure className='duration-150'>
@@ -75,7 +75,7 @@ const Navigate = useNavigate()
             <div className='flex space-x-2 mt-3 '>
               {images.map((img: string, index: number) => <figure className='group border-2 w-1/5 border-transparent 
                hover:border-secondary hover:border-2 cursor-pointer'>
-                <img src={img} key={index} className='w-full h-[100px] group-hover:scale-[.9] duration-150' onClick={showInMain} alt="product image" />
+                <img src={img} key={index} className='w-full md:h-[100px] h-[60px] group-hover:scale-[.9] duration-150' onClick={showInMain} alt="product image" />
               </figure>)}
             </div>
           </div>

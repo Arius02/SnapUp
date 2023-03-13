@@ -22,12 +22,8 @@ export const CategoryLinks:categoryLinksType[] =[
   {id:3627,
     name:"Home Decoration",
   path:"/home-decoration"},
-  {id:3622,
-    name:"Furniture",
-  path:"/furniture"},
-  {id:3934,
-    name:"Tops",
-  path:"/tops"},
+  
+  
 
 ]
 export const sidebarCategories:categoryLinksType[]= [
